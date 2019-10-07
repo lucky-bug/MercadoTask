@@ -19,7 +19,15 @@ class CreateProductsTable extends Migration
             $table->string('unit')->nullable();
             $table->float('price')->unsigned()->default(0);
             $table->unsignedBigInteger('quantity')->default(0);
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('set null')
+            ;
         });
     }
 
